@@ -1,25 +1,18 @@
 export const SearchStyle = () => ({
-  display: "flex",
-  flexFlow: "row",
   fontSize: "x-large",
   justifyContent: "center",
   padding: "20px",
 });
 
 export const SearchResultsContainerStyle = () => ({
-  display: "flex",
-  flexDirection: "column",
   justifyContent: "space-evenly",
   alignItems: "center",
+  backgroundColor: '#282c34',
+  color: 'white',
 });
 
 export const SearchResultsItemStyle = () => ({
-  width: "80vw",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-evenly",
-});
-
-export const SearchResultsItemCellStyle = () => ({
-  width: "20vw",
+  backgroundColor: '#282c34',
+  color: 'white',
+   width: "80vw",
 });
