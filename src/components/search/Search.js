@@ -9,16 +9,13 @@ const Search = () => {
   const dispatch = useDispatch();
   const { destinations, loading, airports } = useSelector((state) => state.app);
   const token = useSelector((state) => state.auth.token.access_token);
-  
-  React.useEffect(() => {
-    dispatch({type:'APP_LOAD_AIRPORTS'});
-  }, [dispatch])
 
-  const loadFlights = (origin) => {
-    if (origin) {
-      dispatch({ type: "APP_SEARCH", data: { origin, token } });
-    }
-  };
+  React.useEffect(() => {
+    dispatch({ type: "APP_LOAD_AIRPORTS" });
+  }, [dispatch]);
+
+  const loadFlights = (origin) =>
+    dispatch({ type: "APP_SEARCH", data: { origin, token } });
 
   return (
     <>
