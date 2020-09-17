@@ -2,11 +2,23 @@ import React from "react";
 import SelectAirport from "../select-airport/SelectAirport";
 import { useDispatch, useSelector } from "react-redux";
 import SearchResults from "./SearchResults";
-import { CircularProgress, Grid } from "@material-ui/core";
+import {
+  CircularProgress,
+  Drawer,
+  Grid,
+  List,
+  ListItem,
+  Typography,
+} from "@material-ui/core";
 
 const Search = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [selectedItem, setSelectedItem] = React.useState({ destination: {} });
+
   const dispatch = useDispatch();
-  const { destinations, loading, airports } = useSelector((state) => state.app);
+  const { destinations, loading, airports, offers } = useSelector(
+    (state) => state.app
+  );
   const token = useSelector((state) => state.auth.token.access_token);
 
   React.useEffect(() => {
@@ -15,6 +27,19 @@ const Search = () => {
 
   const loadFlights = (origin) =>
     dispatch({ type: "APP_SEARCH", data: { origin, token } });
+
+  const toggleDrawer = (open) => {
+    setIsDrawerOpen(open);
+  };
+
+  const OnItemSelected = (item) => {
+    dispatch({
+      type: "APP_LOAD_FLIGHT_OFFERS",
+      data: { url: item.links.flightOffers, token: token },
+    });
+    setSelectedItem(item);
+    toggleDrawer(true);
+  };
 
   return (
     <Grid container justify="center" spacing={3}>
@@ -29,10 +54,25 @@ const Search = () => {
           {loading ? (
             <CircularProgress></CircularProgress>
           ) : (
-            <SearchResults Items={destinations} />
+            <SearchResults Items={destinations} OnSelection={OnItemSelected} />
           )}
         </Grid>
       </Grid>
+      <Drawer
+        anchor="right"
+        open={isDrawerOpen}
+        onClose={() => toggleDrawer(false)}
+      >
+        <List>
+          {offers.map((o) => (
+            <ListItem>
+              <Typography component="p" color="textPrimary">
+                {o.price.grandTotal}
+              </Typography>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
     </Grid>
   );
 };

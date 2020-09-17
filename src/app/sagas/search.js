@@ -1,5 +1,5 @@
 import { put, call, takeEvery, takeLatest } from "redux-saga/effects";
-import { getFlightDestinations } from "../../services/flight";
+import { getFlightDestinations, getFlightOffers } from "../../services/flight";
 import { getAirports } from "../../services/airport";
 
 export function* searchAsync(action) {
@@ -22,4 +22,14 @@ export function* loadAirports() {
 
 export function* watchLoadAirports() {
   yield takeLatest("APP_LOAD_AIRPORTS", loadAirports);
+}
+
+export function* loadFlightOffers(action) {
+  const { url, token } = action.data;
+  const results = yield call(getFlightOffers, url, token);
+  yield put({ type: "APP_LOAD_FLIGHT_OFFERS_COMPLETED", data: { results } });
+}
+
+export function* watchLoadFlightOffers() {
+  yield takeLatest("APP_LOAD_FLIGHT_OFFERS", loadFlightOffers);
 }

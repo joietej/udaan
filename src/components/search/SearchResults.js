@@ -12,7 +12,7 @@ const useStyles = makeStyles( theme => ({
   },
 }));
 
-function SearchResults({ Items }) {
+function SearchResults({ Items, OnSelection }) {
   const classes = useStyles();
   return (
     <Grid container className={classes.root}>
@@ -20,6 +20,7 @@ function SearchResults({ Items }) {
         <SearchResultItem
           Item={d}
           key={`d.destination-${i}`}
+          OnSelect={OnSelection}
         ></SearchResultItem>
       ))}
     </Grid>

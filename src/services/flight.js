@@ -10,3 +10,8 @@ export const getFlightDestinations = async (
   const res = await get(url, token);
   return res?.data || [];
 };
+
+export const getFlightOffers = async (url, token) => {
+  const res = await get(url, token, true);
+  return res?.data || [];
+};

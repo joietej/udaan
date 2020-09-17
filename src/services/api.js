@@ -1,6 +1,6 @@
-export const get = async (url, token) => {
+export const get = async (url, token, ignoreBaseUrl = false) => {
   const base_url = process.env.REACT_APP_AMA_API_URL;
-  const api_url = `${base_url}/${url}`;
+  const api_url = ignoreBaseUrl ? url : `${base_url}/${url}`;
   try {
     const res = await fetch(api_url, {
       headers: {

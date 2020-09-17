@@ -1,4 +1,4 @@
-export default (state = { destinations: [], loading: false, airports: [] }, action) => {
+export default (state = { destinations: [], loading: false, airports: [], offers: [] }, action) => {
   switch (action.type) {
     case "APP_SEARCH":
       return { ...state, loading: true };
@@ -12,6 +12,11 @@ export default (state = { destinations: [], loading: false, airports: [] }, acti
       return {
         ...state,
         airports: action.data.results,
+      }
+    case "APP_LOAD_FLIGHT_OFFERS_COMPLETED":
+      return {
+        ...state,
+        offers: action.data.results
       }
     default:
       return state;
