@@ -1,11 +1,10 @@
 import React from "react";
-import {FormSelect} from 'shards-react';
-import { SelectAirportStyle } from "./styles";
 
 const SelectAirport = ({ Data, OnChange }) => {
   return (
-      <FormSelect
-        style={SelectAirportStyle()}
+    <div>
+      <select
+        style={{ fontSize: "large" }}
         onChange={(e) => OnChange(e.target.value)}
       >
         <option value="">SELECT AIRPORT</option>
@@ -14,7 +13,8 @@ const SelectAirport = ({ Data, OnChange }) => {
             {d.Name}
           </option>
         ))}
-      </FormSelect>
+      </select>
+    </div>
   );
 };
 

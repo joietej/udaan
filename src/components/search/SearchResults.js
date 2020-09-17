@@ -1,17 +1,21 @@
-import React from 'react';
-import { ListGroup, ListGroupItem } from "shards-react";
-import SearchResultItem from './SearchResultItem';
-import { SearchResultsContainerStyle, SearchResultsItemStyle } from './styles';
+import React from 'react'
+import {
+    SearchResultsContainerStyle,
+    SearchResultsItemStyle,
+  } from "./styles";
 
 function SearchResults({Items}) {
     return (
-        <ListGroup style={SearchResultsContainerStyle()}>
+        <div style={SearchResultsContainerStyle()}>
             {Items.map((d, i) => (
-              <ListGroupItem key={`d.destination-${i}`} style={SearchResultsItemStyle()}>
-                <SearchResultItem Item={d}/>
-              </ListGroupItem>
+              <div key={`d.destination-${i}`} style={SearchResultsItemStyle()}>
+                <span style={{ width: "20vw" }}>{d.destination}</span>
+                <span style={{ width: "20vw" }}>{d.price.total} INR</span>
+                <span style={{ width: "20vw" }}>{d.departureDate}</span>
+                <span style={{ width: "20vw" }}>{d.returnDate}</span>
+              </div>
             ))}
-          </ListGroup>
+          </div>
     )
 }
 

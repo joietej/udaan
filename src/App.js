@@ -3,7 +3,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import Search from "./components/search/Search";
 import { useDispatch } from "react-redux";
-import { Container } from "shards-react";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -17,9 +16,9 @@ const App = () => {
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Udaan</h1>
       </header>
-      <Container>
+      <div>
         <Search />
-      </Container>
+      </div>
     </div>
   );
 };

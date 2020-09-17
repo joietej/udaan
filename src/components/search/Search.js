@@ -1,11 +1,9 @@
 import React from "react";
-import { Row, Progress } from "shards-react";
-import { useDispatch, useSelector } from "react-redux";
-
-import SearchResults from "./SearchResults";
 import SelectAirport from "../select-airport/SelectAirport";
-
 import { SearchStyle } from "./styles";
+
+import { useDispatch, useSelector } from "react-redux";
+import SearchResults from "./SearchResults";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -21,19 +19,19 @@ const Search = () => {
 
   return (
     <>
-      <Row style={SearchStyle()}>
+      <div style={SearchStyle()}>
         <SelectAirport
           Data={airports}
           OnChange={(origin) => loadFlights(origin)}
         ></SelectAirport>
-      </Row>
-      <Row>
+      </div>
+      <div>
         {loading ? (
-          <Progress bar animated value={100} />
+          <div>loading...</div>
         ) : (
           <SearchResults Items={destinations} />
         )}
-      </Row>
+      </div>
     </>
   );
 };
