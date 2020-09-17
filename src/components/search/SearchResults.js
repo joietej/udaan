@@ -15,7 +15,7 @@ const useStyles = makeStyles( theme => ({
 function SearchResults({ Items }) {
   const classes = useStyles();
   return (
-    <Grid container className={classes.root} cols="">
+    <Grid container className={classes.root}>
       {Items.map((d, i) => (
         <SearchResultItem
           Item={d}

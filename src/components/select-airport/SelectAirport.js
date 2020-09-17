@@ -3,7 +3,6 @@ import { NativeSelect } from "@material-ui/core";
 
 const SelectAirport = ({ Data, OnChange }) => {
   return (
-    <div>
       <NativeSelect onChange={(e) => OnChange(e.target.value)}>
         <option value="">SELECT AIRPORT</option>
         {Data.map((d, i) => (
@@ -12,7 +11,6 @@ const SelectAirport = ({ Data, OnChange }) => {
           </option>
         ))}
       </NativeSelect>
-    </div>
   );
 };
 

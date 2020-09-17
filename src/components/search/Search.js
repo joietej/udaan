@@ -1,7 +1,5 @@
 import React from "react";
 import SelectAirport from "../select-airport/SelectAirport";
-import { SearchStyle } from "./styles";
-
 import { useDispatch, useSelector } from "react-redux";
 import SearchResults from "./SearchResults";
 import { CircularProgress, Grid } from "@material-ui/core";
@@ -19,21 +17,23 @@ const Search = () => {
     dispatch({ type: "APP_SEARCH", data: { origin, token } });
 
   return (
-    <>
-      <div style={SearchStyle()}>
+    <Grid container justify="center" spacing={3}>
+      <Grid item xs="12">
         <SelectAirport
           Data={airports}
           OnChange={(origin) => loadFlights(origin)}
-        ></SelectAirport>
-      </div>
-      <Grid container justify="center">
-        {loading ? (
-          <CircularProgress></CircularProgress>
-        ) : (
-          <SearchResults Items={destinations} />
-        )}
+        />
       </Grid>
-    </>
+      <Grid item xs="12">
+        <Grid container justify="center">
+          {loading ? (
+            <CircularProgress></CircularProgress>
+          ) : (
+            <SearchResults Items={destinations} />
+          )}
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
