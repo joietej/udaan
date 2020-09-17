@@ -11,12 +11,12 @@ const Segment = ({ Data }) => {
       <Typography component="p" variant="body2" color="textPrimary">
         <FlightTakeoff />
         <Box component="span" m={1}>
-        {Data.departure.iataCode} - {Data.departure.at} 
+        {Data.departure.iataCode} - {new Date(Data.departure.at).toDateString()} 
         </Box>
       </Typography>
       <Typography component="p" variant="body2" color="textPrimary">
         <FlightLand />
-        {Data.arrival.iataCode} - {Data.arrival.at} 
+        {Data.arrival.iataCode} - {new Date(Data.arrival.at).toDateString()} 
       </Typography>
     </>
   );
