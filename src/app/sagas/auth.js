@@ -15,6 +15,6 @@ export function* refreshTokenAsync() {
   while (true) {
       const token = yield fork(authenticate);
       yield fork(storeToken, token.access_token);
-      yield delay(1000 * 60);
+      yield delay(1000 * 60 * 15);
     }
 }
