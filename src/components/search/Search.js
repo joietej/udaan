@@ -10,11 +10,10 @@ import {
   ListItem,
   Typography,
 } from "@material-ui/core";
+import Offer from "../offers/Offer";
 
 const Search = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-  const [selectedItem, setSelectedItem] = React.useState({ destination: {} });
-
   const dispatch = useDispatch();
   const { destinations, loading, airports, offers } = useSelector(
     (state) => state.app
@@ -37,7 +36,6 @@ const Search = () => {
       type: "APP_LOAD_FLIGHT_OFFERS",
       data: { url: item.links.flightOffers, token: token },
     });
-    setSelectedItem(item);
     toggleDrawer(true);
   };
 
@@ -66,9 +64,7 @@ const Search = () => {
         <List>
           {offers.map((o) => (
             <ListItem>
-              <Typography component="p" color="textPrimary">
-                {o.price.grandTotal}
-              </Typography>
+              <Offer Data={o}/>          
             </ListItem>
           ))}
         </List>
