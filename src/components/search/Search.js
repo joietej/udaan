@@ -4,6 +4,7 @@ import { SearchStyle } from "./styles";
 
 import { useDispatch, useSelector } from "react-redux";
 import SearchResults from "./SearchResults";
+import { CircularProgress, Grid } from "@material-ui/core";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -25,13 +26,13 @@ const Search = () => {
           OnChange={(origin) => loadFlights(origin)}
         ></SelectAirport>
       </div>
-      <div>
+      <Grid container justify="center">
         {loading ? (
-          <div>loading...</div>
+          <CircularProgress></CircularProgress>
         ) : (
           <SearchResults Items={destinations} />
         )}
-      </div>
+      </Grid>
     </>
   );
 };

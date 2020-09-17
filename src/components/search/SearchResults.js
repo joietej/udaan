@@ -1,22 +1,29 @@
-import React from 'react'
-import {
-    SearchResultsContainerStyle,
-    SearchResultsItemStyle,
-  } from "./styles";
+import React from "react";
+import { Grid, makeStyles } from "@material-ui/core";
+import SearchResultItem from "./SearchResultItem";
 
-function SearchResults({Items}) {
-    return (
-        <div style={SearchResultsContainerStyle()}>
-            {Items.map((d, i) => (
-              <div key={`d.destination-${i}`} style={SearchResultsItemStyle()}>
-                <span style={{ width: "20vw" }}>{d.destination}</span>
-                <span style={{ width: "20vw" }}>{d.price.total} INR</span>
-                <span style={{ width: "20vw" }}>{d.departureDate}</span>
-                <span style={{ width: "20vw" }}>{d.returnDate}</span>
-              </div>
-            ))}
-          </div>
-    )
+const useStyles = makeStyles( theme => ({
+  root: {
+    width: '80vw',
+    backgroundColor: theme.palette.background.paper,
+    maxHeight: '50vh',
+    overflowY:'auto',
+    justifyContent:'center'
+  },
+}));
+
+function SearchResults({ Items }) {
+  const classes = useStyles();
+  return (
+    <Grid container className={classes.root} cols="">
+      {Items.map((d, i) => (
+        <SearchResultItem
+          Item={d}
+          key={`d.destination-${i}`}
+        ></SearchResultItem>
+      ))}
+    </Grid>
+  );
 }
 
-export default SearchResults
+export default SearchResults;

@@ -1,25 +1,47 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+
 import Search from "./components/search/Search";
+
 import { useDispatch } from "react-redux";
 
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { Container, CssBaseline } from "@material-ui/core";
+import Header from "./components/header/Header";
+
 const App = () => {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: prefersDarkMode ? "dark" : "light",
+        },
+      }),
+    [prefersDarkMode]
+  );
+
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch({ type: "AUTH_GET" });
   }, [dispatch]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Udaan</h1>
-      </header>
-      <div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container
+        maxWidth="xl"
+        style={{
+          color: theme.palette.text,
+          height: "100vh",
+          textAlign: "center",
+        }}
+      >
+        <Header />
         <Search />
-      </div>
-    </div>
+      </Container>
+    </ThemeProvider>
   );
 };
 
