@@ -24,6 +24,7 @@ export default (state = initialAppState, action) => {
     case "APP_LOAD_FLIGHT_OFFERS":
       return {
         ...state,
+        offers:[],
         loadingOffers: true,
       };
     case "APP_LOAD_FLIGHT_OFFERS_COMPLETED":

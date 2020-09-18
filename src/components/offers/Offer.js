@@ -41,7 +41,7 @@ const Offer = ({ Data }) => {
   return (
     <Card>
       <CardContent>
-        <Typography component="p" variant="h3" color="textPrimary">
+        <Typography component="p" variant="h4" color="textPrimary">
           {Data.validatingAirlineCodes[0]}
         </Typography>
         <Typography component="p" variant="h5" color="textPrimary">

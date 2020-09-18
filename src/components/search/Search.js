@@ -72,7 +72,6 @@ const Search = () => {
         onClose={() => toggleDrawer(false)}
       >
         <AppBar position="static">
-         {loadingOffers && (<LinearProgress/>)}
           <Toolbar>
             <Typography variant="h6">Flight Offers</Typography>
             <IconButton color="inherit">
