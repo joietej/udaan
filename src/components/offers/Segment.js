@@ -12,6 +12,9 @@ const Segment = ({ Data }) => {
         <Typography component="p" variant="body2" color="textPrimary">
           {Data.carrierCode} {Data.number}
         </Typography>
+        <Typography component="p" variant="body2" color="textPrimary">
+          {Data.aircraft.code}
+        </Typography>
 
         <Typography component="p" variant="body2" color="textPrimary">
           <FlightTakeoff />

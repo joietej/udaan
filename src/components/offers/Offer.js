@@ -11,7 +11,7 @@ import {
   IconButton
 } from "@material-ui/core";
 import clsx from 'clsx';
-import { ExpandMore } from "@material-ui/icons";
+import { Code, ExpandMore } from "@material-ui/icons";
 import Itinerary from "./Itinerary";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +42,7 @@ const Offer = ({ Data }) => {
     <Card>
       <CardContent>
         <Typography component="p" variant="h4" color="textPrimary">
-          {Data.validatingAirlineCodes[0]}
+          {Data.validatingAirlineCodes.map(code => (<span>{code} </span>))}
         </Typography>
         <Typography component="p" variant="h5" color="textPrimary">
           {Data.price.grandTotal} {Data.price.currency}
