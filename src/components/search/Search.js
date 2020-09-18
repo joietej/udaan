@@ -3,21 +3,31 @@ import SelectAirport from "../select-airport/SelectAirport";
 import { useDispatch, useSelector } from "react-redux";
 import SearchResults from "./SearchResults";
 import {
+  AppBar,
   CircularProgress,
   Drawer,
   Grid,
   List,
   ListItem,
+  Toolbar,
+  IconButton,
+  Badge,
   Typography,
+  LinearProgress
 } from "@material-ui/core";
+import { LocalOffer, Close } from "@material-ui/icons";
 import Offer from "../offers/Offer";
 
 const Search = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const { destinations, loading, airports, offers } = useSelector(
-    (state) => state.app
-  );
+  const {
+    destinations,
+    loading,
+    airports,
+    offers,
+    loadingOffers,
+  } = useSelector((state) => state.app);
   const token = useSelector((state) => state.auth.token.access_token);
 
   React.useEffect(() => {
@@ -32,11 +42,11 @@ const Search = () => {
   };
 
   const OnItemSelected = (item) => {
+    toggleDrawer(true);
     dispatch({
       type: "APP_LOAD_FLIGHT_OFFERS",
       data: { url: item.links.flightOffers, token: token },
     });
-    toggleDrawer(true);
   };
 
   return (
@@ -61,10 +71,25 @@ const Search = () => {
         open={isDrawerOpen}
         onClose={() => toggleDrawer(false)}
       >
+        <AppBar position="static">
+         {loadingOffers && (<LinearProgress/>)}
+          <Toolbar>
+            <Typography variant="h6">Flight Offers</Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={offers.length} color="secondary">
+                <LocalOffer />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit" onClick={() => toggleDrawer(false)}>
+              <Close />
+            </IconButton>
+          </Toolbar>
+          {loadingOffers && (<LinearProgress color="secondary"/>)}
+        </AppBar>
         <List>
           {offers.map((o) => (
             <ListItem>
-              <Offer Data={o}/>          
+              <Offer Data={o} />
             </ListItem>
           ))}
         </List>
