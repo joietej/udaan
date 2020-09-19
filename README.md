@@ -1,4 +1,4 @@
-# Udaan
+# Udaan App
 
 ## Sample Filght Search PWA
 

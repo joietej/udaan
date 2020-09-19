@@ -10,7 +10,7 @@ const Header = () => {
     <div className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <Typography variant="h1" color="textPrimary">
-        Udaan
+        Udaan App
       </Typography>
     </div>
   );
