@@ -15,13 +15,14 @@ export function* watchSearchAsync() {
   yield takeEvery("APP_SEARCH", searchAsync);
 }
 
-export function* loadAirports() {
-  const results = yield call(getAirports);
+export function* loadAirports(action) {
+  const { keyword, token } = action.data;
+  const results = yield call(getAirports, keyword, token);
   yield put({ type: "APP_LOAD_AIRPORT_COMPLETED", data: { results } });
 }
 
 export function* watchLoadAirports() {
-  yield takeLatest("APP_LOAD_AIRPORTS", loadAirports);
+  yield takeEvery("APP_LOAD_AIRPORTS", loadAirports);
 }
 
 export function* loadFlightOffers(action) {

@@ -8,7 +8,18 @@ export const getFlightDestinations = async (
 ) => {
   const url = `shopping/flight-destinations?origin=${origin}&oneWay=${oneWay}&nonStop=${nonStop}`;
   const res = await get(url, token);
-  return res?.data || [];
+  const data =  res?.data || [];
+  const mappings = res?.dictionaries || [] ;
+  const meta = res?.meta ;
+  if(data && mappings){
+    data.forEach((d,i) => {
+      data[i].detailedName = mappings.locations[d.destination]?.detailedName || 'NA';
+      if(meta){
+        data[i].currency = meta.currency;
+      }
+    })
+  }
+  return data;
 };
 
 export const getFlightOffers = async (url, token) => {

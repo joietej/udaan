@@ -1,16 +1,46 @@
 import React from "react";
-import { NativeSelect } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
+import { useDispatch } from "react-redux";
 
-const SelectAirport = ({ Data, OnChange }) => {
+const SelectAirport = ({ Data, OnChange, Token }) => {
+  const [value, setValue] = React.useState(null);
+  const [inputValue, setInputValue] = React.useState("");
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (Token && inputValue.length > 2 && !inputValue.includes(",")) {
+      dispatch({
+        type: "APP_LOAD_AIRPORTS",
+        data: { keyword: inputValue, token: Token },
+      });
+    }
+  }, [inputValue, dispatch, Token]);
+
+  const onValueChange = (e, newValue) => {
+    setValue(newValue);
+    OnChange(newValue.code);
+  };
+
   return (
-      <NativeSelect onChange={(e) => OnChange(e.target.value)}>
-        <option value="">SELECT AIRPORT</option>
-        {Data.map((d, i) => (
-          <option key={d.Code} value={d.Code}>
-            {d.Name}
-          </option>
-        ))}
-      </NativeSelect>
+    <Autocomplete
+      freeSolo
+      value={value}
+      disableClearable
+      getOptionLabel={option => option.name}
+      options={Data}
+      onChange={onValueChange}
+      onInputChange={(e, newValue) => setInputValue(newValue)}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Search Departure City"
+          margin="normal"
+          variant="outlined"
+          InputProps={{ ...params.InputProps, type: "search" }}
+        />
+      )}
+    />
   );
 };
 

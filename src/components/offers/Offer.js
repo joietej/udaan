@@ -11,7 +11,7 @@ import {
   IconButton
 } from "@material-ui/core";
 import clsx from 'clsx';
-import { Code, ExpandMore } from "@material-ui/icons";
+import { ExpandMore } from "@material-ui/icons";
 import Itinerary from "./Itinerary";
 
 const useStyles = makeStyles((theme) => ({

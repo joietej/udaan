@@ -30,10 +30,6 @@ const Search = () => {
   } = useSelector((state) => state.app);
   const token = useSelector((state) => state.auth.token.access_token);
 
-  React.useEffect(() => {
-    dispatch({ type: "APP_LOAD_AIRPORTS" });
-  }, [dispatch]);
-
   const loadFlights = (origin) =>
     dispatch({ type: "APP_SEARCH", data: { origin, token } });
 
@@ -51,9 +47,10 @@ const Search = () => {
 
   return (
     <Grid container justify="center" spacing={3}>
-      <Grid item xs="12">
+      <Grid item xs="12" md="6">
         <SelectAirport
           Data={airports}
+          Token={token}
           OnChange={(origin) => loadFlights(origin)}
         />
       </Grid>
