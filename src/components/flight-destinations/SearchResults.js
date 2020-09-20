@@ -6,7 +6,7 @@ const useStyles = makeStyles( theme => ({
   root: {
     width: '80vw',
     backgroundColor: theme.palette.background.paper,
-    maxHeight: '50vh',
+    maxHeight: '60vh',
     overflowY:'auto',
     justifyContent:'center'
   },
