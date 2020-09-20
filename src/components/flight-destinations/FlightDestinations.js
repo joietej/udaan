@@ -18,7 +18,7 @@ import {
 import { LocalOffer, Close } from "@material-ui/icons";
 import Offer from "../offers/Offer";
 
-const Search = () => {
+const FlightDestinations = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const dispatch = useDispatch();
   const {
@@ -47,14 +47,14 @@ const Search = () => {
 
   return (
     <Grid container justify="center" spacing={3}>
-      <Grid item xs="12" md="6">
+      <Grid item xs={12} md={6}>
         <SelectAirport
           Data={airports}
           Token={token}
           OnChange={(origin) => loadFlights(origin)}
         />
       </Grid>
-      <Grid item xs="12">
+      <Grid item xs={12}>
         <Grid container justify="center">
           {loading ? (
             <CircularProgress></CircularProgress>
@@ -94,4 +94,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default FlightDestinations;
