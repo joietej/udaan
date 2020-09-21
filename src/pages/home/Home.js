@@ -25,7 +25,7 @@ const Home = () => {
           <ImageLink
             Image={search}
             AltImageText="Search"
-            Text="Serach Flights"
+            Text="Search Flights"
             To="/search"
           />
         </Grid>
