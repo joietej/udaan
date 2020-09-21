@@ -4,7 +4,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Collapse,
   List,
   ListItem,
@@ -15,6 +14,8 @@ import {
 import clsx from "clsx";
 import { ExpandMore } from "@material-ui/icons";
 import Itinerary from "./Itinerary";
+
+import Oceanic from "./Oceanic.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +51,7 @@ const Offer = ({ Data }) => {
             alt="logo"
             height="90"
             width="90"
-            src={getLogo(Data.validatingAirlineCodes[0])}
+            src={getLogo(Data.validatingAirlineCodes[0]) || Oceanic}
           />
         }
         title={Data.airlines[0]}

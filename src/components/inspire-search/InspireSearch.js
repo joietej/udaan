@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InspireSearchResults from "./InspireSearchResults";
 import {
   AppBar,
+  Box,
   CircularProgress,
   Drawer,
   Grid,
@@ -13,10 +14,11 @@ import {
   IconButton,
   Badge,
   Typography,
-  LinearProgress
+  LinearProgress,
 } from "@material-ui/core";
 import { LocalOffer, Close } from "@material-ui/icons";
 import Offer from "../offers/Offer";
+import { Skeleton } from "@material-ui/lab";
 
 const InspireSearch = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -59,7 +61,10 @@ const InspireSearch = () => {
           {loading ? (
             <CircularProgress></CircularProgress>
           ) : (
-            <InspireSearchResults Items={destinations} OnSelection={OnItemSelected} />
+            <InspireSearchResults
+              Items={destinations}
+              OnSelection={OnItemSelected}
+            />
           )}
         </Grid>
       </Grid>
@@ -80,13 +85,21 @@ const InspireSearch = () => {
               <Close />
             </IconButton>
           </Toolbar>
-          {loadingOffers && (<LinearProgress color="secondary"/>)}
+          {loadingOffers && <LinearProgress color="secondary" />}
         </AppBar>
         <List>
-          {offers.map((o) => (
-            <ListItem>
-              <Offer Data={o} />
-            </ListItem>
+          {(loadingOffers ? Array.from(new Array(5)) : offers).map((o) => (
+            <>
+              {loadingOffers ? (
+                <Box m={1}>
+                  <Skeleton variant="rect" width={250} height={125} />
+                </Box>
+              ) : (
+                <ListItem>
+                  <Offer Data={o} />
+                </ListItem>
+              )}
+            </>
           ))}
         </List>
       </Drawer>

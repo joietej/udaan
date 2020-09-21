@@ -12,6 +12,7 @@ export const getFlightDestinations = async (
   const data = res?.data || [];
   const mappings = res?.dictionaries || [];
   const meta = res?.meta;
+  
   if (data && mappings) {
     data.forEach((d, i) => {
       data[i].detailedName =
