@@ -10,16 +10,15 @@ const Header = () => {
     <AppBar>
       <Toolbar>
         <Grid container justify="space-between" alignItems="center">
-          <Grid item xs={10} style={{ display: "flex" }} alignItems="center">
+          <Grid container xs={10} alignItems="center">
             <Box m={1}>
               <img src={header} alt="flight" style={{ height: "5vh" }} />
             </Box>
             <LinkButton To="/" Text="Udaan App (Beta)" />
           </Grid>
           <Grid
-            item
+            container
             xs={2}
-            style={{ display: "flex" }}
             justify="flex-end"
             alignItems="center"
           >

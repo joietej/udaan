@@ -4,6 +4,8 @@ export const initialAppState = {
   airports: [],
   offers: [],
   loadingOffers: false,
+  reg: null,
+  footerMessage: "",
 };
 
 export default (state = initialAppState, action) => {
@@ -24,7 +26,7 @@ export default (state = initialAppState, action) => {
     case "APP_LOAD_FLIGHT_OFFERS":
       return {
         ...state,
-        offers:[],
+        offers: [],
         loadingOffers: true,
       };
     case "APP_LOAD_FLIGHT_OFFERS_COMPLETED":
@@ -32,6 +34,12 @@ export default (state = initialAppState, action) => {
         ...state,
         offers: action.data.results,
         loadingOffers: false,
+      };
+    case "APP_SET_FOOTERMESSAGE":
+      return {
+        ...state,
+        footerMessage: action.data.message,
+        reg: action.data.reg,
       };
     default:
       return state;
