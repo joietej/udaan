@@ -8,7 +8,7 @@ const Footer = () => {
   const {footerMessage : message} = useSelector(state => state.app);
   return (
     <Grid container justify="space-between" alignItems="center">
-      <Grid container xs={6} alignItems="center">
+      <Grid container xs={12} alignItems="center">
         <div style={{ color: "gray", opacity: "25%" }}>
           Icons made by{" "}
           <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
@@ -20,7 +20,7 @@ const Footer = () => {
           </a>
         </div>
       </Grid>
-      <Grid container xs={6} alignItems="center" justify="flex-end">
+      <Grid container xs={12} alignItems="center" justify="flex-end">
         <Typography color="textPrimary">{message}</Typography>
       </Grid>
     </Grid>
