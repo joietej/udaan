@@ -18,6 +18,24 @@ export const get = async (url, token, ignoreBaseUrl = false) => {
   }
 };
 
+export const getImage = async (url) => {
+  try {
+    const res = await fetch(url, {
+      headers: {
+        Accept: "image/webp,image/apng",
+      },
+    });
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    const blob = await res.blob();
+    const data = await convertBlobToBase64(blob);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const post = async (url, req) => {
   try {
     const res = await fetch(url, { method: "POST", body: req });
@@ -29,4 +47,15 @@ export const post = async (url, req) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const convertBlobToBase64 = (blob) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+    reader.readAsDataURL(blob);
+  });
 };

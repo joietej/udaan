@@ -2,15 +2,17 @@ import React from "react";
 import {
   Typography,
   Card,
+  CardHeader,
   CardContent,
   CardActions,
   Collapse,
   List,
   ListItem,
   makeStyles,
-  IconButton
+  IconButton,
+  Box,
 } from "@material-ui/core";
-import clsx from 'clsx';
+import clsx from "clsx";
 import { ExpandMore } from "@material-ui/icons";
 import Itinerary from "./Itinerary";
 
@@ -38,28 +40,34 @@ const Offer = ({ Data }) => {
     setExpanded(!expanded);
   };
 
+  const getLogo = (code) => localStorage.getItem(code);
+
   return (
     <Card>
-      <CardContent>
-        <Typography component="p" variant="h4" color="textPrimary">
-          {Data.validatingAirlineCodes.map(code => (<span>{code} </span>))}
-        </Typography>
-        <Typography component="p" variant="h5" color="textPrimary">
-          {Data.price.grandTotal} {Data.price.currency}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMore />
-        </IconButton>
-      </CardActions>
+      <CardHeader
+        avatar={
+          <img
+            alt="logo"
+            height="90"
+            width="90"
+            src={getLogo(Data.validatingAirlineCodes[0])}
+          />
+        }
+        title={Data.airlines[0]}
+        subheader={`${Data.price.grandTotal} ${Data.price.currency}`}
+        action={
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMore />
+          </IconButton>
+        }
+      ></CardHeader>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <List>

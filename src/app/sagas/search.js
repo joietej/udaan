@@ -1,6 +1,6 @@
 import { put, call, takeEvery, takeLatest } from "redux-saga/effects";
 import { getFlightDestinations, getFlightOffers } from "../../services/flight";
-import { getAirports } from "../../services/airport";
+import { getAirlinesLogo, getAirports } from "../../services/airport";
 
 export function* searchAsync(action) {
   let results = [];
@@ -33,4 +33,14 @@ export function* loadFlightOffers(action) {
 
 export function* watchLoadFlightOffers() {
   yield takeLatest("APP_LOAD_FLIGHT_OFFERS", loadFlightOffers);
+}
+
+export function* loadAirlineLogo(action) {
+  const {iataCode} = action.data;
+  const result = yield call(getAirlinesLogo, iataCode);
+  yield put({ type: "APP_LOAD_AIRLINE_LOGO_COMPLETED", data: { result } });
+}
+
+export function* watchLoadAirlineLogo() {
+  yield takeLatest("APP_LOAD_AIRLINE_LOGO", loadAirlineLogo);
 }

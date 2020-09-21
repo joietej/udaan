@@ -6,14 +6,14 @@ const Segment = ({ Data }) => {
   return (
     <Card>
       <CardContent>
-        <Typography component="p" variant="h6" color="textPrimary">
+        <Typography component="p" variant="body1" color="textPrimary">
           {`${Data.departure.iataCode} to ${Data.arrival.iataCode}`}
         </Typography>
         <Typography component="p" variant="body2" color="textPrimary">
-          {Data.carrierCode} {Data.number}
+          {Data.carrierName} {Data.number}
         </Typography>
         <Typography component="p" variant="body2" color="textPrimary">
-          {Data.aircraft.code}
+          {Data.aircraft.name}
         </Typography>
 
         <Typography component="p" variant="body2" color="textPrimary">
