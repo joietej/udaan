@@ -9,7 +9,7 @@ import {
 
 import { FlightTakeoff, FlightLand, Money } from "@material-ui/icons";
 
-const SearchResultItem = ({ Item, OnSelect }) => {
+const InspireSearchResultItem = ({ Item, OnSelect }) => {
   return (
     <ButtonBase onClick={() => OnSelect(Item)}>
       <Card>
@@ -44,4 +44,4 @@ const SearchResultItem = ({ Item, OnSelect }) => {
   );
 };
 
-export default SearchResultItem;
+export default InspireSearchResultItem;

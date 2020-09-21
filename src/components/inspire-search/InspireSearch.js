@@ -1,7 +1,7 @@
 import React from "react";
 import SelectAirport from "../select-airport/SelectAirport";
 import { useDispatch, useSelector } from "react-redux";
-import SearchResults from "./SearchResults";
+import InspireSearchResults from "./InspireSearchResults";
 import {
   AppBar,
   CircularProgress,
@@ -18,7 +18,7 @@ import {
 import { LocalOffer, Close } from "@material-ui/icons";
 import Offer from "../offers/Offer";
 
-const FlightDestinations = () => {
+const InspireSearch = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const dispatch = useDispatch();
   const {
@@ -59,7 +59,7 @@ const FlightDestinations = () => {
           {loading ? (
             <CircularProgress></CircularProgress>
           ) : (
-            <SearchResults Items={destinations} OnSelection={OnItemSelected} />
+            <InspireSearchResults Items={destinations} OnSelection={OnItemSelected} />
           )}
         </Grid>
       </Grid>
@@ -94,4 +94,4 @@ const FlightDestinations = () => {
   );
 };
 
-export default FlightDestinations;
+export default InspireSearch;

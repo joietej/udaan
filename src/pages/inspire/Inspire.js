@@ -1,10 +1,10 @@
 import React from 'react'
-import FlightDestinations from '../../components/flight-destinations/FlightDestinations'
+import InspireSearch from '../../components/inspire-search/InspireSearch'
 
 
 const Inspire = () => {
     return (
-        <FlightDestinations />
+        <InspireSearch />
     )
 }
 

@@ -19,23 +19,27 @@ const Header = () => {
     <AppBar>
       <Toolbar>
         <Grid container justify="space-between" alignItems="center">
-          <Grid container xs={10} alignItems="center">
-            <Box m={1}>
-              <img src={header} alt="flight" style={{ height: "5vh" }} />
-            </Box>
-            <LinkButton To="/" Text="Udaan App (Beta)" />
+          <Grid item xs={10}>
+            <Grid container alignItems="center">
+              <Box m={1}>
+                <img src={header} alt="flight" style={{ height: "5vh" }} />
+              </Box>
+              <LinkButton To="/" Text="Udaan App (Beta)" />
+            </Grid>
           </Grid>
-          <Grid container xs={2} justify="flex-end" alignItems="center">
-            <IconButton>
-              <Settings />
-            </IconButton>
-            {notification && (
+          <Grid item xs={2}>
+            <Grid container justify="flex-end" alignItems="center">
               <IconButton>
-                <Badge badgeContent={1} color="secondary">
-                  <SystemUpdate />
-                </Badge>
+                <Settings />
               </IconButton>
-            )}
+              {notification && (
+                <IconButton>
+                  <Badge badgeContent={1} color="secondary">
+                    <SystemUpdate />
+                  </Badge>
+                </IconButton>
+              )}
+            </Grid>
           </Grid>
         </Grid>
       </Toolbar>

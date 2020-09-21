@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
-import SearchResultItem from "./SearchResultItem";
+import InspireSearchResultItem from "./InspireSearchResultItem";
 
 const useStyles = makeStyles( theme => ({
   root: {
@@ -12,19 +12,19 @@ const useStyles = makeStyles( theme => ({
   },
 }));
 
-function SearchResults({ Items, OnSelection }) {
+function InspireSearchResults({ Items, OnSelection }) {
   const classes = useStyles();
   return (
     <Grid container className={classes.root}>
       {Items.map((d, i) => (
-        <SearchResultItem
+        <InspireSearchResultItem
           Item={d}
           key={`d.destination-${i}`}
           OnSelect={OnSelection}
-        ></SearchResultItem>
+        ></InspireSearchResultItem>
       ))}
     </Grid>
   );
 }
 
-export default SearchResults;
+export default InspireSearchResults;

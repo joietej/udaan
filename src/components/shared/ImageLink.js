@@ -1,11 +1,13 @@
 import React from "react";
-import { Box } from "@material-ui/core";
-import LinkButton from "./LinkButton";
+import { useHistory } from "react-router-dom";
+import { Box, Typography } from "@material-ui/core";
+
 const ImageLink = ({ Text, To, Image, AltImageText }) => {
+  const history = useHistory();
   return (
-    <Box m={1}>
+    <Box m={1} onClick={() => history.push(To)} style={{cursor:"pointer" }}>
       <img height="90" width="90" src={Image} alt={AltImageText} />
-      <LinkButton Text={Text} To={To} />
+      <Typography color="textPrimary">{Text}</Typography>
     </Box>
   );
 };
