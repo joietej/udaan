@@ -1,14 +1,10 @@
 import React from "react";
-import {useSelector} from "react-redux"
 import { Typography, Grid } from "@material-ui/core";
 
-
-
 const Footer = () => {
-  const {footerMessage : message} = useSelector(state => state.app);
   return (
-    <Grid container justify="space-between" alignItems="center">
-      <Grid container xs={12} alignItems="center">
+    <Grid container justify="center" alignItems="center">
+      <Grid item>
         <div style={{ color: "gray", opacity: "25%" }}>
           Icons made by{" "}
           <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
@@ -20,8 +16,8 @@ const Footer = () => {
           </a>
         </div>
       </Grid>
-      <Grid container xs={12} alignItems="center" justify="flex-end">
-        <Typography color="textPrimary">{message}</Typography>
+      <Grid item>
+        <Typography color="textPrimary" variant="caption">©2020 Tejas</Typography>
       </Grid>
     </Grid>
   );

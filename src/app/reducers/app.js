@@ -5,7 +5,7 @@ export const initialAppState = {
   offers: [],
   loadingOffers: false,
   reg: null,
-  footerMessage: "",
+  notification: "",
 };
 
 export default (state = initialAppState, action) => {
@@ -35,10 +35,10 @@ export default (state = initialAppState, action) => {
         offers: action.data.results,
         loadingOffers: false,
       };
-    case "APP_SET_FOOTERMESSAGE":
+    case "APP_UPDATED":
       return {
         ...state,
-        footerMessage: action.data.message,
+        notification: action.data.message,
         reg: action.data.reg,
       };
     default:

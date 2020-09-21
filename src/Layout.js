@@ -19,10 +19,10 @@ const useStyels = makeStyles((theme) => ({
     height: "10vh",
   },
   body: {
-    height: "80vh",
+    height: "85vh",
   },
   footer: {
-    height: "10vh",
+    height: "5vh",
   },
 }));
 

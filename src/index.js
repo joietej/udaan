@@ -21,7 +21,7 @@ serviceWorker.register({
   onUpdate: (reg) => {
     reg.postMessage({ data: { type: "SKIP_WAITING" } });
     store.dispatch({
-      type: "APP_SET_FOOTERMESSAGE",
+      type: "APP_UPDATED",
       data: {
         reg,
         message: "📢 Reload for the latest juicy changes",
