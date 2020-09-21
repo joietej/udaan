@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "fontsource-roboto";
 
-import "./index.css"
+import "./index.css";
 import App from "./App";
 
 import * as serviceWorker from "./serviceWorker";
@@ -17,15 +17,15 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-
 serviceWorker.register({
-  onUpdate: reg =>
+  onUpdate: (reg) => {
+    reg.postMessage({ data: { type: "SKIP_WAITING" } });
     store.dispatch({
       type: "APP_SET_FOOTERMESSAGE",
       data: {
         reg,
-        message:
-          "📢 Reload for the latest juicy changes"
-      }
-    })
+        message: "📢 Reload for the latest juicy changes",
+      },
+    });
+  },
 });
