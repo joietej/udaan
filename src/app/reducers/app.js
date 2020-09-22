@@ -35,11 +35,17 @@ export default (state = initialAppState, action) => {
         offers: action.data.results,
         loadingOffers: false,
       };
-    case "APP_UPDATED_FOUND":
+    case "APP_UPDATE_FOUND":
       return {
         ...state,
         notification: action.data.message,
         waitingWorker: action.data.waitingWorker,
+      };
+    case "APP_UPDATE_COMPLETED":
+      return {
+        ...state,
+        notification: '',
+        waitingWorker: null,
       };
     default:
       return state;
