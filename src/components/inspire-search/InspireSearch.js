@@ -2,23 +2,9 @@ import React from "react";
 import SelectAirport from "../select-airport/SelectAirport";
 import { useDispatch, useSelector } from "react-redux";
 import InspireSearchResults from "./InspireSearchResults";
-import {
-  AppBar,
-  Box,
-  CircularProgress,
-  Drawer,
-  Grid,
-  List,
-  ListItem,
-  Toolbar,
-  IconButton,
-  Badge,
-  Typography,
-  LinearProgress,
-} from "@material-ui/core";
-import { LocalOffer, Close } from "@material-ui/icons";
-import Offer from "../offers/Offer";
-import { Skeleton } from "@material-ui/lab";
+import { CircularProgress, Drawer, Grid } from "@material-ui/core";
+
+import Offers from "../offers/Offers";
 
 const InspireSearch = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -73,35 +59,11 @@ const InspireSearch = () => {
         open={isDrawerOpen}
         onClose={() => toggleDrawer(false)}
       >
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6">Flight Offers</Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={offers.length} color="secondary">
-                <LocalOffer />
-              </Badge>
-            </IconButton>
-            <IconButton color="inherit" onClick={() => toggleDrawer(false)}>
-              <Close />
-            </IconButton>
-          </Toolbar>
-          {loadingOffers && <LinearProgress color="secondary" />}
-        </AppBar>
-        <List>
-          {(loadingOffers ? Array.from(new Array(5)) : offers).map((o) => (
-            <>
-              {loadingOffers ? (
-                <Box m={1}>
-                  <Skeleton variant="rect" width={250} height={125} />
-                </Box>
-              ) : (
-                <ListItem>
-                  <Offer Data={o} />
-                </ListItem>
-              )}
-            </>
-          ))}
-        </List>
+        <Offers
+          Data={offers}
+          Loading={loadingOffers}
+          OnClose={() => toggleDrawer(false)}
+        />
       </Drawer>
     </Grid>
   );
