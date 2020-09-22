@@ -19,7 +19,7 @@ ReactDOM.render(
 
 serviceWorker.register({
   onUpdate: (reg) => {
-    reg.postMessage({ data: { type: "SKIP_WAITING" } });
+    reg.waiting.postMessage({ data: { type: "SKIP_WAITING" } });
     store.dispatch({
       type: "APP_UPDATED",
       data: {
