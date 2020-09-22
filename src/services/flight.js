@@ -1,7 +1,7 @@
 import { get } from "./api";
-import { getAirlinesLogo } from "./airport";
+import { getAirlinesLogoAsync } from "./shared";
 
-export const getFlightDestinations = async (
+export const getFlightDestinationsAsync = async (
   origin,
   token,
   oneWay = false,
@@ -25,7 +25,7 @@ export const getFlightDestinations = async (
   return data;
 };
 
-export const getFlightOffers = async (url, token) => {
+export const getFlightOffersAsync = async (url, token) => {
   const res = await get(url, token, true);
   const data = res?.data || [];
   const mappings = res?.dictionaries || [];
@@ -33,7 +33,7 @@ export const getFlightOffers = async (url, token) => {
   if (mappings?.carriers) {
     for (const code in mappings.carriers) {
       if (mappings.carriers.hasOwnProperty(code)) {
-        await getAirlinesLogo(code);
+        await getAirlinesLogoAsync(code);
       }
     }
   }

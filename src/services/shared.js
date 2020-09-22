@@ -1,7 +1,7 @@
 import { get, getImage } from "./api";
 
 
-export const getAirports = async (keyword, token, type = "CITY") => {
+export const getLocationsAsync = async (keyword, token, type = "CITY") => {
   const url = `reference-data/locations?keyword=${keyword}&subType=${type}&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=LIGHT`;
   const res = await get(url, token);
   return res.data.map((x) => ({
@@ -10,7 +10,7 @@ export const getAirports = async (keyword, token, type = "CITY") => {
   }));
 };
 
-export const getAirlinesLogo = async (iataCode) => {
+export const getAirlinesLogoAsync = async (iataCode) => {
   const logo = localStorage.getItem(iataCode) || null;
 
   if (!logo) {

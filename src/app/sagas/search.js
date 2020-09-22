@@ -1,12 +1,12 @@
 import { put, call, takeEvery, takeLatest } from "redux-saga/effects";
-import { getFlightDestinations, getFlightOffers } from "../../services/flight";
-import { getAirlinesLogo, getAirports } from "../../services/airport";
+import { getFlightDestinationsAsync, getFlightOffersAsync } from "../../services/flight";
+import { getAirlinesLogoAsync, getLocationsAsync } from "../../services/shared";
 
 export function* searchAsync(action) {
   let results = [];
   const { origin, token } = action.data;
   if (origin) {
-    results = yield call(getFlightDestinations, origin, token);
+    results = yield call(getFlightDestinationsAsync, origin, token);
   }
   yield put({ type: "APP_SEARCH_COMPLETED", data: { results } });
 }
@@ -15,32 +15,32 @@ export function* watchSearchAsync() {
   yield takeEvery("APP_SEARCH", searchAsync);
 }
 
-export function* loadAirports(action) {
+export function* loadLocationsAsync(action) {
   const { keyword, token } = action.data;
-  const results = yield call(getAirports, keyword, token);
+  const results = yield call(getLocationsAsync, keyword, token);
   yield put({ type: "APP_LOAD_AIRPORT_COMPLETED", data: { results } });
 }
 
-export function* watchLoadAirports() {
-  yield takeEvery("APP_LOAD_AIRPORTS", loadAirports);
+export function* watchLoadLocationsAsync() {
+  yield takeEvery("APP_LOAD_AIRPORTS", loadLocationsAsync);
 }
 
-export function* loadFlightOffers(action) {
+export function* loadFlightOffersAsync(action) {
   const { url, token } = action.data;
-  const results = yield call(getFlightOffers, url, token);
+  const results = yield call(getFlightOffersAsync, url, token);
   yield put({ type: "APP_LOAD_FLIGHT_OFFERS_COMPLETED", data: { results } });
 }
 
-export function* watchLoadFlightOffers() {
-  yield takeLatest("APP_LOAD_FLIGHT_OFFERS", loadFlightOffers);
+export function* watchLoadFlightOffersAsync() {
+  yield takeLatest("APP_LOAD_FLIGHT_OFFERS", loadFlightOffersAsync);
 }
 
-export function* loadAirlineLogo(action) {
+export function* loadAirlineLogoAsync(action) {
   const {iataCode} = action.data;
-  const result = yield call(getAirlinesLogo, iataCode);
+  const result = yield call(getAirlinesLogoAsync, iataCode);
   yield put({ type: "APP_LOAD_AIRLINE_LOGO_COMPLETED", data: { result } });
 }
 
-export function* watchLoadAirlineLogo() {
-  yield takeLatest("APP_LOAD_AIRLINE_LOGO", loadAirlineLogo);
+export function* watchLoadAirlineLogoAsync() {
+  yield takeLatest("APP_LOAD_AIRLINE_LOGO", loadAirlineLogoAsync);
 }

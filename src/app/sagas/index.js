@@ -1,5 +1,5 @@
 import { all } from "redux-saga/effects";
-import { watchSearchAsync, watchLoadAirports, watchLoadFlightOffers } from "./search";
+import { watchSearchAsync, watchLoadLocationsAsync, watchLoadFlightOffersAsync } from "./search";
 import { watchAuthenticateAsync, refreshTokenAsync } from "./auth";
 import { watchUpdate } from "./app";
 
@@ -8,8 +8,8 @@ export default function* rootSaga() {
     watchSearchAsync(),
     watchAuthenticateAsync(),
     refreshTokenAsync(),
-    watchLoadAirports(),
-    watchLoadFlightOffers(),
+    watchLoadLocationsAsync(),
+    watchLoadFlightOffersAsync(),
     watchUpdate()
   ]);
 }
