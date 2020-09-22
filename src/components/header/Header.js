@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import header from "./header-icon.svg";
 import {
   AppBar,
@@ -14,7 +14,8 @@ import LinkButton from "../shared/LinkButton";
 import { Settings, SystemUpdate } from "@material-ui/icons";
 
 const Header = () => {
-  const { notification } = useSelector((state) => state.app);
+  const { notification, waitingWorker } = useSelector((state) => state.app);
+  const dispatch = useDispatch();
   return (
     <AppBar>
       <Toolbar>
@@ -33,7 +34,7 @@ const Header = () => {
                 <Settings />
               </IconButton>
               {notification && (
-                <IconButton>
+                <IconButton onClick={() => dispatch({type:'APP_UPDATE', data : {waitingWorker}})}>
                   <Badge badgeContent={1} color="secondary">
                     <SystemUpdate />
                   </Badge>

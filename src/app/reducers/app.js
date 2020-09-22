@@ -4,7 +4,7 @@ export const initialAppState = {
   airports: [],
   offers: [],
   loadingOffers: false,
-  reg: null,
+  waitingWorker: null,
   notification: "",
 };
 
@@ -35,11 +35,11 @@ export default (state = initialAppState, action) => {
         offers: action.data.results,
         loadingOffers: false,
       };
-    case "APP_UPDATED":
+    case "APP_UPDATED_FOUND":
       return {
         ...state,
         notification: action.data.message,
-        reg: action.data.reg,
+        waitingWorker: action.data.waitingWorker,
       };
     default:
       return state;
