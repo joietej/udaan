@@ -10,6 +10,23 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from "./app/store";
 
+const dispatchUpdateMessage = (reg) =>
+  store.dispatch({
+    type: "APP_UPDATE_FOUND",
+    data: {
+      waitingWorker: reg.waiting || reg,
+      message: "Update for the latest juicy changes",
+    },
+  });
+
+  const dispatchUpdatedMessage = (msg) =>
+  store.dispatch({
+    type: "APP_UPDATE_COMPLETED",
+    data: {
+      message: msg,
+    },
+  });
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
@@ -18,13 +35,8 @@ ReactDOM.render(
 );
 
 serviceWorker.register({
-  onUpdate: (reg) => {
-    store.dispatch({
-      type: "APP_UPDATE_FOUND",
-      data: {
-        waitingWorker: reg.waiting,
-        message: "📢 Reload for the latest juicy changes",
-      },
-    });
-  },
+  onUpdate: (reg) => dispatchUpdateMessage(reg),
+  onWaiting: (reg) => dispatchUpdateMessage(reg),
+  onActivated: () => dispatchUpdatedMessage('🎉 App Updated'),
+  onSuccess:() => dispatchUpdatedMessage('✔ App is ready'),
 });

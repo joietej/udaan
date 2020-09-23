@@ -5,7 +5,7 @@ export const initialAppState = {
   offers: [],
   loadingOffers: false,
   waitingWorker: null,
-  notification: "",
+  notification: "Welcome to Udaan App!",
 };
 
 export default (state = initialAppState, action) => {
@@ -44,7 +44,7 @@ export default (state = initialAppState, action) => {
     case "APP_UPDATE_COMPLETED":
       return {
         ...state,
-        notification: '',
+        notification: action.data.message,
         waitingWorker: null,
       };
     default:

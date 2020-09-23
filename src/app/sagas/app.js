@@ -1,9 +1,14 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
 
 export function* update(action) {
   const { waitingWorker } = action.data;
-  yield call(waitingWorker.postMessage({ data: { type: "SKIP_WAITING" } }));
-  yield put({ type: "APP_UPDATE_COMPLETED" });
+  yield waitingWorker.postMessage({ type: "SKIP_WAITING" });
+  yield put({
+    type: "APP_UPDATE_COMPLETED",
+    data: {
+      message: "🎉 App Updated",
+    },
+  });
 }
 
 export function* watchUpdate() {

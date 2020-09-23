@@ -8,14 +8,30 @@ import {
   Grid,
   IconButton,
   Badge,
+  Snackbar,
+  makeStyles,
 } from "@material-ui/core";
 import LinkButton from "../shared/LinkButton";
 
 import { Settings, SystemUpdate } from "@material-ui/icons";
+import MuiAlert from "@material-ui/lab/Alert";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const Header = () => {
+  const classes = useStyles();
   const { notification, waitingWorker } = useSelector((state) => state.app);
   const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(notification && true);
+  const handleClose = () => setOpen(false);
+
   return (
     <AppBar>
       <Toolbar>
@@ -33,8 +49,12 @@ const Header = () => {
               <IconButton>
                 <Settings />
               </IconButton>
-              {notification && (
-                <IconButton onClick={() => dispatch({type:'APP_UPDATE', data : {waitingWorker}})}>
+              {waitingWorker && (
+                <IconButton
+                  onClick={() =>
+                    dispatch({ type: "APP_UPDATE", data: { waitingWorker } })
+                  }
+                >
                   <Badge badgeContent={1} color="secondary">
                     <SystemUpdate />
                   </Badge>
@@ -44,6 +64,20 @@ const Header = () => {
           </Grid>
         </Grid>
       </Toolbar>
+      <div className={classes.root}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          {notification && (
+            <MuiAlert
+              levation={6}
+              variant="filled"
+              severity="info"
+              onClose={handleClose}
+            >
+              {notification}
+            </MuiAlert>
+          )}
+        </Snackbar>
+      </div>
     </AppBar>
   );
 };
