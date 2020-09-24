@@ -52,6 +52,11 @@ export default (state = initialAppState, action) => {
         notification: action.data.message,
         waitingWorker: null,
       };
+    case 'APP_CLEAR_NOTIFICATION':
+      return {
+        ...state,
+        notification: null
+      }
     default:
       return state;
   }

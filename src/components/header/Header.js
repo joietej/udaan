@@ -30,7 +30,10 @@ const Header = () => {
   const { notification, waitingWorker } = useSelector((state) => state.app);
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(notification && true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    dispatch({type: 'APP_CLEAR_NOTIFICATION'});
+  }
 
   return (
     <AppBar>
