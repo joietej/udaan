@@ -12,7 +12,7 @@ const InspireSearch = () => {
   const {
     destinations,
     loading,
-    airports,
+    locations,
     offers,
     loadingOffers,
   } = useSelector((state) => state.app);
@@ -38,7 +38,7 @@ const InspireSearch = () => {
     <Grid container justify="center" spacing={3}>
       <Grid item xs={12} md={6}>
         <SelectAirport
-          Data={airports}
+          Data={locations}
           Token={token}
           OnChange={(origin) => loadFlights(origin)}
           Selected={origin}
