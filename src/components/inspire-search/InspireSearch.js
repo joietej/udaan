@@ -17,6 +17,7 @@ const InspireSearch = () => {
     loadingOffers,
   } = useSelector((state) => state.app);
   const token = useSelector((state) => state.auth.token.access_token);
+  const {origin} = useSelector(state => state.app)
 
   const loadFlights = (origin) =>
     dispatch({ type: "APP_SEARCH", data: { origin, token } });
@@ -40,6 +41,7 @@ const InspireSearch = () => {
           Data={airports}
           Token={token}
           OnChange={(origin) => loadFlights(origin)}
+          Selected={origin}
         />
       </Grid>
       <Grid item xs={12}>

@@ -6,7 +6,7 @@ export function* searchAsync(action) {
   let results = [];
   const { origin, token } = action.data;
   if (origin) {
-    results = yield call(getFlightDestinationsAsync, origin, token);
+    results = yield call(getFlightDestinationsAsync, origin.code, token);
   }
   yield put({ type: "APP_SEARCH_COMPLETED", data: { results } });
 }
@@ -18,11 +18,11 @@ export function* watchSearchAsync() {
 export function* loadLocationsAsync(action) {
   const { keyword, token } = action.data;
   const results = yield call(getLocationsAsync, keyword, token);
-  yield put({ type: "APP_LOAD_AIRPORT_COMPLETED", data: { results } });
+  yield put({ type: "APP_LOAD_LOCATION_COMPLETED", data: { results } });
 }
 
 export function* watchLoadLocationsAsync() {
-  yield takeEvery("APP_LOAD_AIRPORTS", loadLocationsAsync);
+  yield takeEvery("APP_LOAD_LOCATIONS", loadLocationsAsync);
 }
 
 export function* loadFlightOffersAsync(action) {

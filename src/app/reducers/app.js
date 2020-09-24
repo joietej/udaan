@@ -1,27 +1,32 @@
 export const initialAppState = {
   destinations: [],
   loading: false,
-  airports: [],
+  locations: [],
   offers: [],
   loadingOffers: false,
   waitingWorker: null,
   notification: "Welcome to Udaan App!",
+  origin: null,
 };
 
 export default (state = initialAppState, action) => {
   switch (action.type) {
     case "APP_SEARCH":
-      return { ...state, loading: true };
+      return { 
+         ...state,
+         loading: true,
+         origin: action.data.origin
+      };
     case "APP_SEARCH_COMPLETED":
       return {
         ...state,
         destinations: action.data.results,
         loading: false,
       };
-    case "APP_LOAD_AIRPORT_COMPLETED":
+    case "APP_LOAD_LOCATION_COMPLETED":
       return {
         ...state,
-        airports: action.data.results,
+        locations: action.data.results,
       };
     case "APP_LOAD_FLIGHT_OFFERS":
       return {

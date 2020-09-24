@@ -3,15 +3,15 @@ import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { useDispatch } from "react-redux";
 
-const SelectAirport = ({ Data, OnChange, Token }) => {
-  const [value, setValue] = React.useState(null);
+const SelectAirport = ({ Data, OnChange, Token, Selected }) => {
+  const [value, setValue] = React.useState(Selected);
   const [inputValue, setInputValue] = React.useState("");
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (Token && inputValue.length > 2 && !inputValue.includes(",")) {
       dispatch({
-        type: "APP_LOAD_AIRPORTS",
+        type: "APP_LOAD_LOCATIONS",
         data: { keyword: inputValue, token: Token },
       });
     }
@@ -19,7 +19,7 @@ const SelectAirport = ({ Data, OnChange, Token }) => {
 
   const onValueChange = (e, newValue) => {
     setValue(newValue);
-    OnChange(newValue.code);
+    OnChange(newValue);
   };
 
   return (
