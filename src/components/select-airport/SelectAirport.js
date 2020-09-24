@@ -4,7 +4,7 @@ import { Autocomplete } from "@material-ui/lab";
 import { useDispatch } from "react-redux";
 
 const SelectAirport = ({ Data, OnChange, Token, Selected }) => {
-  const [value, setValue] = React.useState(Selected);
+  const [value, setValue] = React.useState(Selected || null);
   const [inputValue, setInputValue] = React.useState("");
   const dispatch = useDispatch();
 
