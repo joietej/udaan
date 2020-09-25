@@ -16,8 +16,8 @@ export function* watchSearchAsync() {
 }
 
 export function* loadLocationsAsync(action) {
-  const { keyword, token } = action.data;
-  const results = yield call(getLocationsAsync, keyword, token);
+  const { keyword } = action.data;
+  const results = yield call(getLocationsAsync, keyword);
   yield put({ type: "APP_LOAD_LOCATION_COMPLETED", data: { results } });
 }
 

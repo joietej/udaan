@@ -3,19 +3,19 @@ import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { useDispatch } from "react-redux";
 
-const SelectAirport = ({ Data, OnChange, Token, Selected }) => {
+const SelectAirport = ({ Data, OnChange, Selected }) => {
   const [value, setValue] = React.useState(Selected || null);
   const [inputValue, setInputValue] = React.useState("");
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (Token && inputValue.length > 2 && !inputValue.includes(",")) {
+    if (inputValue.length > 2 && !inputValue.includes(",")) {
       dispatch({
         type: "APP_LOAD_LOCATIONS",
-        data: { keyword: inputValue, token: Token },
+        data: { keyword: inputValue },
       });
     }
-  }, [inputValue, dispatch, Token]);
+  }, [inputValue, dispatch]);
 
   const onValueChange = (e, newValue) => {
     setValue(newValue);

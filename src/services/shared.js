@@ -1,13 +1,11 @@
-import { get, getImage } from "./api";
+import { getImage } from "./api";
+import fetch from "isomorphic-unfetch";
 
-
-export const getLocationsAsync = async (keyword, token, type = "CITY") => {
-  const url = `reference-data/locations?keyword=${keyword}&subType=${type}&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=LIGHT`;
-  const res = await get(url, token);
-  return res.data.map((x) => ({
-    code: x.iataCode,
-    name: `${x.address.cityName}`,
-  }));
+export const getLocationsAsync = async (keyword, type = "CITY") => {
+  const url = `/api/locations?keyword=${keyword}&subType=${type}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
 };
 
 export const getAirlinesLogoAsync = async (iataCode) => {
