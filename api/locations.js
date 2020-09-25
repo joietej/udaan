@@ -1,4 +1,4 @@
-const getToken = require("../server/token");
+const getToken = require("../src/server/token");
 
 module.exports =  async (req, res) => {
     const token = await getToken();
