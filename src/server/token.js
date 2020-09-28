@@ -1,4 +1,4 @@
-const api = require("../server/api");
+const api = require("./api");
 
 module.exports = async () => {
   const base_url = process.env.AMA_API_URL;
