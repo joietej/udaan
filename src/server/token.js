@@ -10,5 +10,6 @@ module.exports = async () => {
   params.append("grant_type", "client_credentials");
 
   const data = await api.post(url, params);
+
   return data;
 };
