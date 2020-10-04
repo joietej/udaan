@@ -11,6 +11,7 @@ module.exports =  async (req, res) => {
 const getLocationsAsync = async (keyword, token, type = "CITY") => {
     const url = `reference-data/locations?keyword=${keyword}&subType=${type}&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=LIGHT`;
     const res = await api.get(url, token);
+    if(!res?.data) return [];
     return res.data.map((x) => ({
       code: x.iataCode,
       name: `${x.address.cityName}`,
