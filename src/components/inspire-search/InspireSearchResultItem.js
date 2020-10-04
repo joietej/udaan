@@ -7,10 +7,11 @@ import {
   ButtonBase,
   CardHeader,
   makeStyles,
+  Avatar,
 } from "@material-ui/core";
 
 import { FlightTakeoff, FlightLand, Money } from "@material-ui/icons";
-import place from "./place.svg";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,7 @@ const InspireSearchResultItem = ({ Item, OnSelect }) => {
     <ButtonBase style={{ width: "90%" }} onClick={() => OnSelect(Item)}>
       <Card className={classes.root}>
         <CardHeader
-          avatar={<img alt="logo" height="45" width="45" src={place} />}
+          avatar={<Avatar alt={Item.destination}></Avatar>}
           title={Item.destination}
           titleTypographyProps={{ variant: "h2" }}
           subheader={Item.detailedName}
