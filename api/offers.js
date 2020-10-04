@@ -3,7 +3,7 @@ const api = require("../src/server/api");
 
 module.exports = async (req, res) => {
   const { access_token } = await getToken();
-  const { url } = req.query;
+  const { url } = req.body;
   const data = await getFlightOffersAsync(url, access_token);
   res.json(data);
 };
