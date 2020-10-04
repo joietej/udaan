@@ -5,8 +5,8 @@ import InspireSearchResultItem from "./InspireSearchResultItem";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "80vw",
-    backgroundColor: theme.palette.background.paper,
-    maxHeight: "60vh",
+    backgroundColor: theme.palette.background.default,
+    maxHeight: "70vh",
     overflowY: "auto",
   },
 }));
