@@ -25,7 +25,7 @@ const App = () => {
 
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch({ type: "AUTH_GET" });
+    dispatch({ type: "APP_INIT" });
   }, [dispatch]);
 
   return (

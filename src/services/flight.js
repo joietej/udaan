@@ -1,34 +1,22 @@
-import { get } from "./api";
+import fetch from "isomorphic-unfetch";
 import { getAirlinesLogoAsync } from "./shared";
 
 export const getFlightDestinationsAsync = async (
   origin,
-  token,
   oneWay = false,
   nonStop = false
 ) => {
-  const url = `shopping/flight-destinations?origin=${origin}&oneWay=${oneWay}&nonStop=${nonStop}`;
-  const res = await get(url, token);
-  const data = res?.data || [];
-  const mappings = res?.dictionaries || [];
-  const meta = res?.meta;
-  
-  if (data && mappings) {
-    data.forEach((d, i) => {
-      data[i].detailedName =
-        mappings.locations[d.destination]?.detailedName || "NA";
-      if (meta) {
-        data[i].currency = meta.currency;
-      }
-    });
-  }
+  const url = `/api/destinations?origin=${origin}&oneWay=${oneWay}&nonStop=${nonStop}`;
+  const res = await fetch(url);
+  const data = res.json();
   return data;
 };
 
-export const getFlightOffersAsync = async (url, token) => {
-  const res = await get(url, token, true);
-  const data = res?.data || [];
-  const mappings = res?.dictionaries || [];
+export const getFlightOffersAsync = async (url) => {
+  const api_url = `/api/offers?url=${url}`;
+  const res = await fetch(api_url);
+  
+  const { data, mappings } = res;
 
   if (mappings?.carriers) {
     for (const code in mappings.carriers) {
@@ -38,25 +26,5 @@ export const getFlightOffersAsync = async (url, token) => {
     }
   }
 
-  if (data && mappings) {
-    data.forEach((offer) => {
-      if (offer.validatingAirlineCodes) {
-        offer.airlines = [];
-        offer.validatingAirlineCodes.forEach((code, i) => {
-          offer.airlines.push(mappings.carriers[code]);
-        });
-      }
-      if (offer.itineraries) {
-        offer.itineraries.forEach((itinerary) => {
-          if (itinerary.segments) {
-            itinerary.segments.forEach((segment) => {
-              segment.carrierName = mappings.carriers[segment.carrierCode];
-              segment.aircraft.name = mappings.aircraft[segment.aircraft.code];
-            });
-          }
-        });
-      }
-    });
-  }
   return data;
 };

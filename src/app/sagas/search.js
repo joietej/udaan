@@ -4,9 +4,9 @@ import { getAirlinesLogoAsync, getLocationsAsync } from "../../services/shared";
 
 export function* searchAsync(action) {
   let results = [];
-  const { origin, token } = action.data;
+  const { origin } = action.data;
   if (origin) {
-    results = yield call(getFlightDestinationsAsync, origin.code, token);
+    results = yield call(getFlightDestinationsAsync, origin.code);
   }
   yield put({ type: "APP_SEARCH_COMPLETED", data: { results } });
 }
@@ -26,8 +26,8 @@ export function* watchLoadLocationsAsync() {
 }
 
 export function* loadFlightOffersAsync(action) {
-  const { url, token } = action.data;
-  const results = yield call(getFlightOffersAsync, url, token);
+  const { url } = action.data;
+  const results = yield call(getFlightOffersAsync, url);
   yield put({ type: "APP_LOAD_FLIGHT_OFFERS_COMPLETED", data: { results } });
 }
 

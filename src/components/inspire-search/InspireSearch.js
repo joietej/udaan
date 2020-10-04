@@ -16,11 +16,11 @@ const InspireSearch = () => {
     offers,
     loadingOffers,
   } = useSelector((state) => state.app);
-  const token = useSelector((state) => state.auth.token.access_token);
+  
   const { origin } = useSelector((state) => state.app);
 
   const loadFlights = (origin) =>
-    dispatch({ type: "APP_SEARCH", data: { origin, token } });
+    dispatch({ type: "APP_SEARCH", data: { origin } });
 
   const toggleDrawer = (open) => {
     setIsDrawerOpen(open);
@@ -30,7 +30,7 @@ const InspireSearch = () => {
     toggleDrawer(true);
     dispatch({
       type: "APP_LOAD_FLIGHT_OFFERS",
-      data: { url: item.links.flightOffers, token: token },
+      data: { url: item.links.flightOffers },
     });
   };
 
