@@ -14,7 +14,7 @@ export const getFlightDestinationsAsync = async (
 
 export const getFlightOffersAsync = async (url) => {
   const api_url = "/api/offers";
-  const res = await fetch(api_url, { method: "POST", body: { url } });
+  const res = await fetch(api_url, { method: "POST", body:JSON.stringify({ url }) });
 
   const { data, mappings } = res;
 
