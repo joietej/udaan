@@ -1,4 +1,4 @@
-import fetch from "isomorphic-unfetch";
+import { get, post } from "./api";
 import { getAirlinesLogoAsync } from "./shared";
 
 export const getFlightDestinationsAsync = async (
@@ -7,14 +7,13 @@ export const getFlightDestinationsAsync = async (
   nonStop = false
 ) => {
   const url = `/api/destinations?origin=${origin}&oneWay=${oneWay}&nonStop=${nonStop}`;
-  const res = await fetch(url);
-  const data = res.json();
+  const data = await get(url);
   return data;
 };
 
 export const getFlightOffersAsync = async (url) => {
   const api_url = "/api/offers";
-  const res = await fetch(api_url, { method: "POST", body:JSON.stringify({ url }) });
+  const res = await post(api_url, { url });
 
   const { data, mappings } = res;
 

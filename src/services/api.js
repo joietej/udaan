@@ -1,10 +1,9 @@
-export const get = async (url, token, ignoreBaseUrl = false) => {
-  const base_url = process.env.REACT_APP_AMA_API_URL;
-  const api_url = ignoreBaseUrl ? url : `${base_url}/${url}`;
+import fetch from "isomorphic-unfetch";
+
+export const get = async (url) => {
   try {
-    const res = await fetch(api_url, {
+    const res = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
         Accept: "application/json",
       },
     });
@@ -36,9 +35,13 @@ export const getImage = async (url) => {
   }
 };
 
-export const post = async (url, req) => {
+export const post = async (url, payload) => {
   try {
-    const res = await fetch(url, { method: "POST", body: req });
+    const res = await fetch(url, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
     if (!res.ok) {
       throw new Error(res.statusText);
     }
