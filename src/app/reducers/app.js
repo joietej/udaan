@@ -23,6 +23,11 @@ export default (state = initialAppState, action) => {
         destinations: action.data.results,
         loading: false,
       };
+      case "APP_LOAD_LOCATION":
+        return {
+          ...state,
+          loading:false,
+        };
     case "APP_LOAD_LOCATION_COMPLETED":
       return {
         ...state,
