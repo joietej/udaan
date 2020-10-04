@@ -5,13 +5,14 @@ import header from "./header-icon.svg";
 import {
   AppBar,
   Toolbar,
-  Box,
   Grid,
   IconButton,
   Badge,
   Snackbar,
   makeStyles,
   Typography,
+  Menu,
+  MenuItem,
 } from "@material-ui/core";
 
 import { Settings, SystemUpdate, ArrowBack } from "@material-ui/icons";
@@ -33,13 +34,29 @@ const Header = () => {
   const history = useHistory();
   const location = useLocation();
   const classes = useStyles();
+
   const { notification, waitingWorker } = useSelector((state) => state.app);
   const dispatch = useDispatch();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(notification && true);
+
   const handleClose = () => {
     setOpen(false);
     dispatch({ type: "APP_CLEAR_NOTIFICATION" });
   };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const openMenu = Boolean(anchorEl);
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const CheckForUpdate = (e) => window.location.reload();
 
   return (
     <AppBar>
@@ -66,7 +83,7 @@ const Header = () => {
           </Grid>
           <Grid item xs={2}>
             <Grid container justify="flex-end" alignItems="center">
-              <IconButton>
+              <IconButton onClick={handleMenu}>
                 <Settings />
               </IconButton>
               {waitingWorker && (
@@ -84,6 +101,25 @@ const Header = () => {
           </Grid>
         </Grid>
       </Toolbar>
+      <>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={openMenu}
+          onClose={handleCloseMenu}
+        >
+          <MenuItem onClick={CheckForUpdate}>Check For Update</MenuItem>
+        </Menu>
+      </>
       <div className={classes.root}>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           {notification && (
