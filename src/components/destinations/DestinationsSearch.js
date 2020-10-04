@@ -1,23 +1,20 @@
 import React from "react";
-import SearchDestination from "./SearchDestination";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import SearchDestination from "./SearchDestination";
 import Destinations from "./Destinations";
 import { CircularProgress, Drawer, Grid } from "@material-ui/core";
-
-import Offers from "../offers/Offers";
 
 const InspireSearch = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const {
-    destinations,
-    loading,
-    locations,
-    offers,
-    loadingOffers,
-  } = useSelector((state) => state.app);
-  
+  const { destinations, loading, locations } = useSelector(
+    (state) => state.app
+  );
+
   const { origin } = useSelector((state) => state.app);
+
+  const history = useHistory();
 
   const loadFlights = (origin) =>
     dispatch({ type: "APP_SEARCH", data: { origin } });
@@ -27,7 +24,7 @@ const InspireSearch = () => {
   };
 
   const OnItemSelected = (item) => {
-    toggleDrawer(true);
+    history.push("offers");
     dispatch({
       type: "APP_LOAD_FLIGHT_OFFERS",
       data: { url: item.links.flightOffers },
@@ -48,10 +45,7 @@ const InspireSearch = () => {
           {loading ? (
             <CircularProgress></CircularProgress>
           ) : (
-            <Destinations
-              Items={destinations}
-              OnSelection={OnItemSelected}
-            />
+            <Destinations Items={destinations} OnSelection={OnItemSelected} />
           )}
         </Grid>
       </Grid>
@@ -59,13 +53,7 @@ const InspireSearch = () => {
         anchor="right"
         open={isDrawerOpen}
         onClose={() => toggleDrawer(false)}
-      >
-        <Offers
-          Data={offers}
-          Loading={loadingOffers}
-          OnClose={() => toggleDrawer(false)}
-        />
-      </Drawer>
+      ></Drawer>
     </Grid>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useLocation } from "react-router";
 import header from "./header-icon.svg";
 import {
   AppBar,
@@ -10,11 +11,13 @@ import {
   Badge,
   Snackbar,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
-import LinkButton from "../shared/LinkButton";
 
-import { Settings, SystemUpdate } from "@material-ui/icons";
+import { Settings, SystemUpdate, ArrowBack } from "@material-ui/icons";
 import MuiAlert from "@material-ui/lab/Alert";
+import ImageLink from "../shared/ImageLink";
+import routeNames from "../../model/routeNames";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,25 +29,39 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = () => {
+  const routes = routeNames();
+  const history = useHistory();
+  const location = useLocation();
   const classes = useStyles();
   const { notification, waitingWorker } = useSelector((state) => state.app);
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(notification && true);
   const handleClose = () => {
     setOpen(false);
-    dispatch({type: 'APP_CLEAR_NOTIFICATION'});
-  }
+    dispatch({ type: "APP_CLEAR_NOTIFICATION" });
+  };
 
   return (
     <AppBar>
       <Toolbar>
         <Grid container justify="space-between" alignItems="center">
           <Grid item xs={10}>
-            <Grid container alignItems="center">
-              <Box m={1}>
-                <img src={header} alt="flight" style={{ height: "5vh" }} />
-              </Box>
-              <LinkButton To="/" Text="Udaan App (Beta)" />
+            <Grid container alignItems="center" spacing={1}>
+              {history.length && location.pathname !== "/" && (
+                <IconButton onClick={() => history.goBack()}>
+                  <ArrowBack />
+                </IconButton>
+              )}
+              <ImageLink
+                To="/"
+                Image={header}
+                AltImageText="Udaan App (Beta)"
+                ImageHeight="32"
+                ImageWidth="32"
+              />
+              <Typography variant="h5" color="textPrimary">
+                {routes[location.pathname]}
+              </Typography>
             </Grid>
           </Grid>
           <Grid item xs={2}>

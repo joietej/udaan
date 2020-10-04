@@ -1,42 +1,32 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
 import {
-  AppBar,
   Box,
   List,
   ListItem,
-  Toolbar,
-  IconButton,
+  Grid,
   Badge,
   Typography,
   LinearProgress,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 
-import { LocalOffer, Close } from "@material-ui/icons";
 import Offer from "../offers/Offer";
 
-const Offers = ({ Data, Loading, OnClose }) => {
+const Offers = () => {
+  const { offers, loadingOffers: loading } = useSelector((state) => state.app);
   return (
-    <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">Flight Offers</Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={Data.length} color="secondary">
-              <LocalOffer />
-            </Badge>
-          </IconButton>
-          <IconButton color="inherit" onClick={OnClose}>
-            <Close />
-          </IconButton>
-        </Toolbar>
-        {Loading && <LinearProgress color="secondary" />}
-      </AppBar>
+    <Grid container justify="center">
+      <Grid item>
+        <Badge badgeContent={offers.length} color="secondary">
+          <Typography variant="h2">Flight Offers</Typography>
+        </Badge>
+      </Grid>
+      {loading && <LinearProgress color="secondary" />}
       <List>
-        {(Loading ? Array.from(new Array(5)) : Data).map((o) => (
+        {(loading ? Array.from(new Array(5)) : offers).map((o) => (
           <>
-            {Loading ? (
+            {loading ? (
               <Box m={1}>
                 <Skeleton variant="rect" width={250} height={125} />
               </Box>
@@ -48,7 +38,7 @@ const Offers = ({ Data, Loading, OnClose }) => {
           </>
         ))}
       </List>
-    </>
+    </Grid>
   );
 };
 

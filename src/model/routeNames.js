@@ -1,4 +1,7 @@
-export const routeNames = () => ({
+const routeNames = () => ({
   "/inspire": "Inspire Flight Search",
-  "/search": "Fligt Search",
+  "/search": "Flight Search",
+  "/offers": "Flight Offers"
 });
+
+export default routeNames;

@@ -5,6 +5,7 @@ import { Container, Grid, makeStyles } from "@material-ui/core";
 
 import Inspire from "./pages/inspire/Inspire";
 import Home from "./pages/home/Home";
+import FlightOffers from './pages/flightOffers/FlightOffers';
 
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
@@ -37,6 +38,9 @@ const Layout = () => {
         <Switch>
           <Route exact path="/inspire">
             <Inspire />
+          </Route>
+          <Route exact path="/offers">
+            <FlightOffers />
           </Route>
           <Route path="/">
             <Home />

@@ -37,6 +37,14 @@ const Home = () => {
             To="/schedule"
           />
         </Grid>
+        <Grid item>
+          <ImageLink
+            Image={schedule}
+            AltImageText="Schedule"
+            Text="Flights Offers"
+            To="/offers"
+          />
+        </Grid>
       </Grid>
     </>
   );
