@@ -83,6 +83,7 @@ function registerValidSW(swUrl, config) {
             if (config && config.onActivated) {
               config.onActivated();
               window.location.reload();
+              localStorage.removeItem('persist:root');
             }
           }
           if (installingWorker.state === "installed") {
