@@ -18,9 +18,12 @@ const InspireSearchResultItem = ({ Item, OnSelect }) => {
         <CardHeader
           avatar={<img alt="logo" height="45" width="45" src={place} />}
           title={Item.destination}
-          subheader={Item.detailedName}
+          titleTypographyProps={{ variant: "h2" }}
         ></CardHeader>
         <CardContent>
+          <Typography component="p" variant="caption" color="textPrimary">
+            {Item.detailedName}
+          </Typography>
           <Typography component="p" variant="body2" color="textPrimary">
             <Money />
             <Box component="span" m={1}>

@@ -9,13 +9,13 @@ const SelectAirport = ({ Data, OnChange, Selected }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (inputValue.length > 2 && !inputValue.includes(",")) {
+    if (inputValue.length > 2 && inputValue !== value) {
       dispatch({
         type: "APP_LOAD_LOCATIONS",
         data: { keyword: inputValue },
       });
     }
-  }, [inputValue, dispatch]);
+  }, [inputValue, value, dispatch]);
 
   const onValueChange = (e, newValue) => {
     setValue(newValue);
