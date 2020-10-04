@@ -3,6 +3,9 @@ const fetch = require("isomorphic-unfetch");
 const get = async (url, token, ignoreBaseUrl = false) => {
   const base_url = process.env.AMA_API_URL;
   const api_url = ignoreBaseUrl ? url : `${base_url}/${url}`;
+  
+  console.log(api_url);
+
   try {
     const res = await fetch(api_url, {
       headers: {
