@@ -19,7 +19,7 @@ import Oceanic from "./Oceanic.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: 300,
   },
   expand: {
     transform: "rotate(0deg)",
@@ -44,7 +44,7 @@ const Offer = ({ Data }) => {
   const getLogo = (code) => localStorage.getItem(code);
 
   return (
-    <Card>
+    <Card className={classes.root}>
       <CardHeader
         avatar={
           <img
@@ -72,9 +72,9 @@ const Offer = ({ Data }) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <List>
-            {Data.itineraries.map((i) => (
-              <ListItem>
-                <Itinerary Data={i} />
+            {Data.itineraries.map((d,i) => (
+              <ListItem key={`itinerary_${i}`}>
+                <Itinerary Data={d} />
               </ListItem>
             ))}
           </List>

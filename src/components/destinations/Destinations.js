@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "80vw",
     backgroundColor: theme.palette.background.default,
-    maxHeight: "70vh",
+    maxHeight: "75vh",
     overflowY: "auto",
   },
 }));
