@@ -4,8 +4,8 @@ import Segment from "./Segment";
 const Itinerary = ({ Data }) => {
   return (
     <>
-      {Data.segments.map((s) => (
-        <Segment Data={s} />
+      {Data.segments.map((s,i) => (
+        <Segment key={`segments_${i}`} Data={s} />
       ))}
     </>
   );

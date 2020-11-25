@@ -23,21 +23,21 @@ const Offers = () => {
         </Badge>
       </Grid>
       {loading && <LinearProgress color="secondary" />}
-      <List>
-        {(loading ? Array.from(new Array(5)) : offers).map((o) => (
+      <Grid container justify="center" style={{ gap: "1rem" }}>
+        {(loading ? Array.from(new Array(20)) : offers).map((o, i) => (
           <>
             {loading ? (
-              <Box m={1}>
-                <Skeleton variant="rect" width={250} height={125} />
+              <Box key={`skeleton_offer_${i}`} m={1}>
+                <Skeleton variant="rect" width={300} height={125} />
               </Box>
             ) : (
-              <ListItem>
+              <Grid item key={o.id} style={{ width: "20%" }}>
                 <Offer Data={o} />
-              </ListItem>
+              </Grid>
             )}
           </>
         ))}
-      </List>
+      </Grid>
     </Grid>
   );
 };

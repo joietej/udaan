@@ -16,12 +16,8 @@ function Destinations({ Items, OnSelection }) {
   return (
     <Grid container className={classes.root} spacing={1}>
       {Items.map((d, i) => (
-        <Grid item xs={12} md={4}>
-          <DestinationCard
-            Item={d}
-            key={`d.destination-${i}`}
-            OnSelect={OnSelection}
-          ></DestinationCard>
+        <Grid key={`d.destination-${i}`} item xs={12} md={4}>
+          <DestinationCard Item={d} OnSelect={OnSelection}></DestinationCard>
         </Grid>
       ))}
     </Grid>
