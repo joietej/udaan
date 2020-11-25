@@ -24,3 +24,5 @@ yarn-error.log*
 .env
 src/sample_data.json
 .vercel-token
+
+.vercel

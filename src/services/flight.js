@@ -8,7 +8,7 @@ export const getFlightDestinationsAsync = async (
 ) => {
   const url = `/api/destinations?origin=${origin}&oneWay=${oneWay}&nonStop=${nonStop}`;
   const data = await get(url);
-  return data;
+  return data || [];
 };
 
 export const getFlightOffersAsync = async (url) => {
@@ -25,5 +25,5 @@ export const getFlightOffersAsync = async (url) => {
     }
   }
 
-  return data;
+  return data || [];
 };
